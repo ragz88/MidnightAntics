@@ -290,8 +290,6 @@ public class FirstPersonController : MonoBehaviour
             }
         }
 
-        Debug.Log(sprintInput);
-
 
         if (enableSprint)
         {
