@@ -76,10 +76,8 @@ public class ArmsController : MonoBehaviour
                 armsLerping = false;
             }
         }
-
-
         // Main arms movement controls should only function when in Arms movement mode
-        if (armsActive)
+        else if (armsActive)
         {
             float leftHorizontalMovement = Input.GetAxis("Horizontal");
             float leftVerticalMovement   = Input.GetAxis("Vertical");
@@ -101,18 +99,28 @@ public class ArmsController : MonoBehaviour
     /// <param name="verticalMovement">Float representing the vertical movement requested by the player.</param>
     void MoveArm(Transform arm, float horizontalMovement, float verticalMovement)
     {
-        if (arm = leftArm)
+        if (arm == leftArm)
         {
-            horizontalMovement = Mathf.Clamp(horizontalMovement, leftArmInitPosition.x - maxSideDistance, leftArmInitPosition.x + maxSideDistance);
-            verticalMovement = Mathf.Clamp(verticalMovement, leftArmInitPosition.z - maxReverseDistance, leftArmInitPosition.x + maxForwardDistance);
+                        
+            if ((arm.localPosition.x - initialArmsPositionLeft.position.x) < -maxSideDistance || (arm.localPosition.x + initialArmsPositionLeft.position.x) > maxSideDistance)
+            {
+                horizontalMovement = 0;
+            }
+
+            if (arm.localPosition.z - verticalMovement < -maxReverseDistance || arm.localPosition.z + verticalMovement > maxForwardDistance)
+            {
+                horizontalMovement = 0;
+            }
+
+            
         }
         else
         {
-            horizontalMovement = Mathf.Clamp(horizontalMovement, rightArmInitPosition.x - maxSideDistance, rightArmInitPosition.x + maxSideDistance);
-            verticalMovement = Mathf.Clamp(verticalMovement, rightArmInitPosition.z - maxReverseDistance, rightArmInitPosition.x + maxForwardDistance);
+            //horizontalMovement = Mathf.Clamp(horizontalMovement, rightArmInitPosition.x - maxSideDistance, rightArmInitPosition.x + maxSideDistance);
+            //verticalMovement = Mathf.Clamp(verticalMovement, rightArmInitPosition.z - maxReverseDistance, rightArmInitPosition.x + maxForwardDistance);
         }
 
-        
+        arm.localPosition = arm.localPosition + new Vector3(horizontalMovement, 0, verticalMovement) * armSpeed * Time.deltaTime;
     }
 
 
