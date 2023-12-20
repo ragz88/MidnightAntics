@@ -5056,6 +5056,7 @@ GameObject:
   - component: {fileID: 2004600232}
   - component: {fileID: 2004600234}
   - component: {fileID: 2004600233}
+  - component: {fileID: 2004600235}
   m_Layer: 0
   m_Name: MainLamp (2)
   m_TagString: Untagged
@@ -5163,6 +5164,22 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &2004600235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004600231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ea0b66394e32b24a81f0fede93f17ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  light: {fileID: 2004600234}
+  minIntensity: 0.2
+  maxIntensity: 2
+  smoothing: 5
 --- !u!4 &2005707596 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 55642a814d267eb4aa27ce7e71cc9ac7,
