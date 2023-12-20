@@ -4687,6 +4687,8 @@ MonoBehaviour:
   armLimitSmoothingStrength: 8
   leftArm: {fileID: 1875995704}
   rightArm: {fileID: 911670113}
+  leftAnim: {fileID: 0}
+  rightAnim: {fileID: 0}
   standardRestPositionLeft: {fileID: 430689233}
   standardRestPositionRight: {fileID: 335224639}
   holdingRestPositionLeft: {fileID: 2078633810}
@@ -5177,8 +5179,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   light: {fileID: 2004600234}
-  minIntensity: 0.2
-  maxIntensity: 2
+  minIntensity: 0.5
+  maxIntensity: 5
   smoothing: 5
 --- !u!4 &2005707596 stripped
 Transform:
