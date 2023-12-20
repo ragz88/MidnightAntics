@@ -12,10 +12,11 @@ public class ArmsController : MonoBehaviour
 
     [SerializeField] float maxForwardDistance = 1f;
     [SerializeField] float maxReverseDistance = 1f;
-    [SerializeField] float maxSideDistance = 1f;
+    [SerializeField] float maxOuterDistance = 1f;
+    [SerializeField] float maxInnerDistance = 1f;
 
+    [SerializeField] float armLimitSmoothingStrength = 8f;
 
-    
 
 
     [Header("Arm Objects")]
@@ -54,8 +55,11 @@ public class ArmsController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        leftArmInitPosition = leftArm.localPosition;
-        rightArmInitPosition = rightArm.localPosition;
+
+        leftArmInitPosition = initialArmsPositionLeft.localPosition;
+        rightArmInitPosition = initialArmsPositionLeft.localPosition;
+        //leftArmInitPosition = leftArm.localPosition;
+        //rightArmInitPosition = rightArm.localPosition;
     }
 
     // Update is called once per frame
@@ -81,8 +85,8 @@ public class ArmsController : MonoBehaviour
         {
             float leftHorizontalMovement = Input.GetAxis("Horizontal");
             float leftVerticalMovement   = Input.GetAxis("Vertical");
-            float rightHorizontalMovement  = Input.GetAxis("LookX");
-            float rightVerticalMovement  = Input.GetAxis("LookY");
+            float rightHorizontalMovement  = Input.GetAxis("RightHandX");
+            float rightVerticalMovement  = Input.GetAxis("RightHandY");
 
             MoveArm(leftArm, leftHorizontalMovement, leftVerticalMovement);
             MoveArm(rightArm, rightHorizontalMovement, rightVerticalMovement);
@@ -99,25 +103,102 @@ public class ArmsController : MonoBehaviour
     /// <param name="verticalMovement">Float representing the vertical movement requested by the player.</param>
     void MoveArm(Transform arm, float horizontalMovement, float verticalMovement)
     {
+        Debug.Log(initialArmsPositionLeft.position);
         if (arm == leftArm)
         {
-                        
-            if ((arm.localPosition.x - initialArmsPositionLeft.position.x) < -maxSideDistance || (arm.localPosition.x + initialArmsPositionLeft.position.x) > maxSideDistance)
+            if (horizontalMovement < 0)
             {
-                horizontalMovement = 0;
+                
+                // In the nono zone
+                if (arm.localPosition.x < initialArmsPositionLeft.localPosition.x - maxOuterDistance)
+                {
+                    arm.localPosition = Vector3.Lerp(arm.localPosition, 
+                        new Vector3(initialArmsPositionLeft.localPosition.x - maxOuterDistance, arm.localPosition.y, arm.localPosition.z),
+                        armLimitSmoothingStrength * Time.deltaTime);
+                }
+            
+            }
+            else if (horizontalMovement > 0)
+            {
+                if (arm.localPosition.x > initialArmsPositionLeft.localPosition.x + maxInnerDistance)
+                {
+                    arm.localPosition = Vector3.Lerp(arm.localPosition,
+                        new Vector3(initialArmsPositionLeft.localPosition.x + maxInnerDistance, arm.localPosition.y, arm.localPosition.z),
+                        armLimitSmoothingStrength * Time.deltaTime);
+                }
             }
 
-            if (arm.localPosition.z - verticalMovement < -maxReverseDistance || arm.localPosition.z + verticalMovement > maxForwardDistance)
+
+            if (verticalMovement < 0)
             {
-                horizontalMovement = 0;
+
+                // In the nono zone
+                if (arm.localPosition.z < initialArmsPositionLeft.localPosition.z - maxReverseDistance)
+                {
+                    arm.localPosition = Vector3.Lerp(arm.localPosition,
+                        new Vector3(arm.localPosition.x, arm.localPosition.y, initialArmsPositionLeft.localPosition.z - maxReverseDistance),
+                        armLimitSmoothingStrength * Time.deltaTime);
+                }
+
+            }
+            else if (verticalMovement > 0)
+            {
+                if (arm.localPosition.z > initialArmsPositionLeft.localPosition.z + maxForwardDistance)
+                {
+                    arm.localPosition = Vector3.Lerp(arm.localPosition,
+                        new Vector3(arm.localPosition.x, arm.localPosition.y, initialArmsPositionLeft.localPosition.z + maxForwardDistance),
+                        armLimitSmoothingStrength * Time.deltaTime);
+                }
             }
 
             
         }
-        else
+        else //right arm
         {
-            //horizontalMovement = Mathf.Clamp(horizontalMovement, rightArmInitPosition.x - maxSideDistance, rightArmInitPosition.x + maxSideDistance);
-            //verticalMovement = Mathf.Clamp(verticalMovement, rightArmInitPosition.z - maxReverseDistance, rightArmInitPosition.x + maxForwardDistance);
+            if (horizontalMovement < 0)
+            {
+
+                // In the nono zone
+                if (arm.localPosition.x < initialArmsPositionRight.localPosition.x - maxInnerDistance)
+                {
+                    arm.localPosition = Vector3.Lerp(arm.localPosition,
+                        new Vector3(initialArmsPositionRight.localPosition.x - maxInnerDistance, arm.localPosition.y, arm.localPosition.z),
+                        armLimitSmoothingStrength * Time.deltaTime);
+                }
+
+            }
+            else if (horizontalMovement > 0)
+            {
+                if (arm.localPosition.x > initialArmsPositionRight.localPosition.x + maxOuterDistance)
+                {
+                    arm.localPosition = Vector3.Lerp(arm.localPosition,
+                        new Vector3(initialArmsPositionRight.localPosition.x + maxOuterDistance, arm.localPosition.y, arm.localPosition.z),
+                        armLimitSmoothingStrength * Time.deltaTime);
+                }
+            }
+
+
+            if (verticalMovement < 0)
+            {
+
+                // In the nono zone
+                if (arm.localPosition.z < initialArmsPositionRight.localPosition.z - maxReverseDistance)
+                {
+                    arm.localPosition = Vector3.Lerp(arm.localPosition,
+                        new Vector3(arm.localPosition.x, arm.localPosition.y, initialArmsPositionRight.localPosition.z - maxReverseDistance),
+                        armLimitSmoothingStrength * Time.deltaTime);
+                }
+
+            }
+            else if (verticalMovement > 0)
+            {
+                if (arm.localPosition.z > initialArmsPositionRight.localPosition.z + maxForwardDistance)
+                {
+                    arm.localPosition = Vector3.Lerp(arm.localPosition,
+                        new Vector3(arm.localPosition.x, arm.localPosition.y, initialArmsPositionRight.localPosition.z + maxForwardDistance),
+                        armLimitSmoothingStrength * Time.deltaTime);
+                }
+            }
         }
 
         arm.localPosition = arm.localPosition + new Vector3(horizontalMovement, 0, verticalMovement) * armSpeed * Time.deltaTime;
