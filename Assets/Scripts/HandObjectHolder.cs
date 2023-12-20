@@ -60,24 +60,21 @@ public class HandObjectHolder : MonoBehaviour
 
                     case PickUpObject.MovementType.Drawer:
 
-                        Vector3 potentialPos = Vector3.Lerp(objectTrans.position, transform.position + pickUpObject.leftHoldOffsetPosition, pickUpSpeed);
-                        potentialPos = objectTrans.InverseTransformPoint(potentialPos);
-                        potentialPos = new Vector3(pickUpObject.initPosition.x, pickUpObject.initPosition.y, potentialPos.z);
-                        objectTrans.localPosition = potentialPos;
+                        Vector3 newPos = Vector3.Lerp(objectTrans.localPosition, objectTrans.InverseTransformPoint(transform.position + pickUpObject.leftHoldOffsetPosition), pickUpSpeed);
+                        newPos = new Vector3(pickUpObject.initPosition.x, pickUpObject.initPosition.y, newPos.z);
 
-                        /*if (Vector3.Distance(objectTrans.position, (transform.position + pickUpObject.leftHoldOffsetPosition)) > 0.2f)
+                        if (newPos.z > pickUpObject.maxDrawerDistance)
                         {
-                            objectTrans.position = Vector3.Lerp(objectTrans.position,
-                                new Vector3(objectTrans.position.x, objectTrans.position.y, (transform.position + pickUpObject.leftHoldOffsetPosition).z), pickUpSpeed);
-                            if ()
-                            {
-
-                            }
+                            newPos = new Vector3(newPos.x, newPos.y, pickUpObject.maxDrawerDistance);
+                        }
+                        else if (newPos.z < 0)
+                        {
+                            newPos = new Vector3(newPos.x, newPos.y, 0);
                         }
 
+                        objectTrans.localPosition = newPos;
 
-                        objectTrans.position = Vector3.Lerp(objectTrans.position, transform.position + pickUpObject.leftHoldOffsetPosition, pickUpSpeed);
-                        objectTrans.rotation = Quaternion.Slerp(objectTrans.rotation, pickUpObject.leftHoldOffsetRotation, 0.1f);*/
+
                         break;
 
                     case PickUpObject.MovementType.Door:
@@ -155,7 +152,10 @@ public class HandObjectHolder : MonoBehaviour
         if (pickUpBody != null)
         {
             //pickUpBody.freezeRotation = false;
-            pickUpBody.velocity = Vector3.zero;
+            if (!pickUpBody.isKinematic)
+            {
+                pickUpBody.velocity = Vector3.zero;
+            }
             pickUpBody = null;
         }
     }
