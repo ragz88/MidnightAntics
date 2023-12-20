@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using Unity.VisualScripting.FullSerializer;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
@@ -22,6 +23,13 @@ public class ArmsController : MonoBehaviour
     [Header("Arm Objects")]
     [SerializeField] Transform leftArm;
     [SerializeField] Transform rightArm;
+
+
+    [Space]
+    [Header("Arm Animations")]
+    [SerializeField] Animator leftAnim;
+    [SerializeField] Animator rightAnim;
+
 
     [Space]
     [Header("Arm Lerping")]
@@ -48,6 +56,8 @@ public class ArmsController : MonoBehaviour
     private Vector3 rightArmInitPosition;
     private bool armsActive = false;
     private bool armsLerping = false;
+    private bool leftHandClosed = false;
+    private bool rightHandClosed = false;
     private Transform currentLerpPosLeft;
     private Transform currentLerpPosRight;
 
@@ -65,6 +75,7 @@ public class ArmsController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // When arms are moving to their initial or rest positions
         if (armsLerping)
         {
             leftArm.position = Vector3.Lerp(leftArm.position, currentLerpPosLeft.position, lerpSpeed * Time.deltaTime);
@@ -90,8 +101,27 @@ public class ArmsController : MonoBehaviour
 
             MoveArm(leftArm, leftHorizontalMovement, leftVerticalMovement);
             MoveArm(rightArm, rightHorizontalMovement, rightVerticalMovement);
+        }
+
+        // Handles Holding Objects
+        float leftGripInput  = Input.GetAxis("LeftGrip");
+        float rightGripInput = Input.GetAxis("RightGrip");
+        
+        if (leftGripInput != 0)
+        {
+            CloseHand(leftArm);
+        }
+        else
+        {
 
         }
+
+        if (rightGripInput != 0)
+        {
+            CloseHand(rightArm);
+        }
+
+
     }
 
 
@@ -202,6 +232,34 @@ public class ArmsController : MonoBehaviour
         }
 
         arm.localPosition = arm.localPosition + new Vector3(horizontalMovement, 0, verticalMovement) * armSpeed * Time.deltaTime;
+    }
+
+
+    
+    /// <summary>
+    /// Closes the hand (if it's still open), then keeps it that way.
+    /// </summary>
+    /// <param name="arm">The arm who's hand must be closed.</param>
+    void CloseHand(Transform arm)
+    {
+        if (arm == leftArm)
+        {
+            if (!leftHandClosed)
+            {
+                leftHandClosed = true;
+                // play animation
+                leftAnim.SetBool("HandClosed", true);
+            }
+        }
+        else if (arm == rightArm)
+        {
+            if (!rightHandClosed)
+            {
+                rightHandClosed = true;
+                // play animation
+                rightAnim.SetBool("HandClosed", true);
+            }
+        }
     }
 
 
