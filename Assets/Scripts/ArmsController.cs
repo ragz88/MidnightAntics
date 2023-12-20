@@ -23,6 +23,8 @@ public class ArmsController : MonoBehaviour
     [Header("Arm Objects")]
     [SerializeField] Transform leftArm;
     [SerializeField] Transform rightArm;
+    [SerializeField] HandObjectHolder leftObjectHolder;
+    [SerializeField] HandObjectHolder rightObjectHolder;
 
 
     [Space]
@@ -50,6 +52,8 @@ public class ArmsController : MonoBehaviour
     [SerializeField] float lerpSpeed = 2f;
     [Tooltip("How close the hand needs to be to the final position before the lerp will end.")]
     [SerializeField] float lerpAccuracy = 0.1f;
+    [Tooltip("How quickly objects are lerped into the hands.")]
+    [SerializeField] float pickUpSpeed = 0.1f;
 
 
     private Vector3 leftArmInitPosition;
@@ -68,6 +72,8 @@ public class ArmsController : MonoBehaviour
 
         leftArmInitPosition = initialArmsPositionLeft.localPosition;
         rightArmInitPosition = initialArmsPositionLeft.localPosition;
+        leftObjectHolder.PickUpSpeed = pickUpSpeed;
+        rightObjectHolder.PickUpSpeed = pickUpSpeed;
         //leftArmInitPosition = leftArm.localPosition;
         //rightArmInitPosition = rightArm.localPosition;
     }
@@ -137,7 +143,6 @@ public class ArmsController : MonoBehaviour
     /// <param name="verticalMovement">Float representing the vertical movement requested by the player.</param>
     void MoveArm(Transform arm, float horizontalMovement, float verticalMovement)
     {
-        Debug.Log(initialArmsPositionLeft.position);
         if (arm == leftArm)
         {
             if (horizontalMovement < 0)
@@ -249,10 +254,12 @@ public class ArmsController : MonoBehaviour
         if (arm == leftArm)
         {
             leftAnim.SetBool("HandClosed", true);
+            leftObjectHolder.PickUp();
         }
         else if (arm == rightArm)
         {
             rightAnim.SetBool("HandClosed", true);
+            rightObjectHolder.PickUp();
         }
     }
 
@@ -266,10 +273,12 @@ public class ArmsController : MonoBehaviour
         if (arm == leftArm)
         {
             leftAnim.SetBool("HandClosed", false);
+            leftObjectHolder.DropObject();
         }
         else if (arm == rightArm)
         {
             rightAnim.SetBool("HandClosed", false);
+            rightObjectHolder.DropObject();
         }
     }
 
