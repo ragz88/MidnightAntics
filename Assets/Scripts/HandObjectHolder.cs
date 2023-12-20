@@ -16,6 +16,7 @@ public class HandObjectHolder : MonoBehaviour
 
 
     private float pickUpSpeed = 1f;
+    private Collider objectCollider;
     private Transform objectTrans;
     private PickUpObject pickUpObject;
     private Rigidbody pickUpBody;
@@ -49,11 +50,17 @@ public class HandObjectHolder : MonoBehaviour
         {
             if (handSide == HandType.Left)
             {
-                objectTrans.position = Vector3.Lerp(objectTrans.position, transform.position + pickUpObject.leftHoldOffsetTransform.localPosition, pickUpSpeed);
+                objectTrans.position = Vector3.Lerp(objectTrans.position, transform.position + pickUpObject.leftHoldOffsetPosition, pickUpSpeed);
+                objectTrans.rotation = Quaternion.Slerp(objectTrans.rotation, pickUpObject.leftHoldOffsetRotation, 0.1f);
+                
+                
             }
-            else
+            else if (handSide == HandType.Right)
             {
-                objectTrans.position = Vector3.Lerp(objectTrans.position, transform.position + pickUpObject.rightHoldOffsetTransform.localPosition, pickUpSpeed);
+                //objectTrans.position = Vector3.Lerp(objectTrans.position, transform.position + pickUpObject.rightHoldOffsetTransform.localPosition, pickUpSpeed);
+                //objectTrans.localRotation = Quaternion.Slerp(objectTrans.localRotation, pickUpObject.rightHoldOffsetTransform.localRotation, 1);
+                //objectTrans.rotation = pickUpObject.rightHoldOffsetTransform.localRotation;
+                objectTrans.SetPositionAndRotation(transform.position + pickUpObject.rightHoldOffsetPosition, pickUpObject.rightHoldOffsetRotation);
             }
             
         }
@@ -69,11 +76,13 @@ public class HandObjectHolder : MonoBehaviour
         RaycastHit hit;
         if (Physics.SphereCast(transform.position + (sphereCastRadius * 4 * Vector3.up), sphereCastRadius, Vector3.down, out hit, sphereCastRadius * 4 * pickUpRange, castLayerMask))
         {
+            objectCollider = hit.collider;
             objectTrans = hit.collider.transform;
+            objectCollider.enabled = false;
             pickUpObject = objectTrans.GetComponent<PickUpObject>();
             pickUpBody = objectTrans.GetComponent<Rigidbody>();
 
-            pickUpBody.freezeRotation = true;
+            //pickUpBody.freezeRotation = true;
         }
     }
 
@@ -83,9 +92,16 @@ public class HandObjectHolder : MonoBehaviour
         objectTrans = null;
         pickUpObject = null;
 
+        if (objectCollider != null)
+        {
+            objectCollider.enabled = true;
+            objectCollider = null;
+        }
+
         if (pickUpBody != null)
         {
-            pickUpBody.freezeRotation = false;
+            //pickUpBody.freezeRotation = false;
+            pickUpBody.velocity = Vector3.zero;
             pickUpBody = null;
         }
     }

@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PickUpObject : MonoBehaviour
 {
-    [Tooltip("The positions and rotations in these transforms will overwrite the default positions when lerping the object into the hand.")]
-    public Transform leftHoldOffsetTransform;
-    public Transform rightHoldOffsetTransform;
+    public Vector3 leftHoldOffsetPosition;
+    public Vector3 rightHoldOffsetPosition;
+    public Quaternion leftHoldOffsetRotation;
+    public Quaternion rightHoldOffsetRotation;
 
     // Start is called before the first frame update
     void Start()
