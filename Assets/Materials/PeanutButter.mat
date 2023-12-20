@@ -122,7 +122,7 @@ Material:
     - _SSAmount: 2.4
     - _SSAmount_1: 2.62
     - _SSContrast: 1
-    - _Smoothness: 0.5
+    - _Smoothness: 0.6
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -132,9 +132,9 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.6132076, g: 0.46389732, b: 0.3557761, a: 1}
-    - _EdgeColor: {r: 0.9433962, g: 0.5764952, b: 0.4138483, a: 0}
+    - _Color: {r: 0.745283, g: 0.40206337, b: 0.15819688, a: 1}
+    - _EdgeColor: {r: 0.6981132, g: 0.3645291, b: 0.2206301, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SSColor: {r: 0.4811321, g: 0.29553574, b: 0.24283554, a: 0}
+    - _SSColor: {r: 0.5849056, g: 0.23971544, b: 0.1462264, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
