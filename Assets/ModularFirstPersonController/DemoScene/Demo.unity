@@ -521,6 +521,11 @@ MonoBehaviour:
   leftHoldOffsetRotation: {x: 0, y: 0, z: 0, w: 0}
   rightHoldOffsetRotation: {x: 0, y: 0, z: 0, w: 0}
   maxDrawerDistance: 1
+  maxDoorDistance: 1
+  closedAngle: 0
+  openAngle: 90
+  doorTrans: {fileID: 0}
+  handleVisualsPos: {fileID: 0}
   initPosition: {x: 0, y: 0, z: 0}
 --- !u!54 &63180067
 Rigidbody:
@@ -2519,6 +2524,7 @@ Transform:
   - {fileID: 2015253816}
   - {fileID: 525076903}
   - {fileID: 1372444595}
+  - {fileID: 989380450}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &883979174
@@ -2898,6 +2904,12 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!4 &989380450 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8634063338699000053, guid: eae34fc1e4482d049badb220a0e0bff0,
+    type: 3}
+  m_PrefabInstance: {fileID: 4734755568098463413}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1000565219
 Mesh:
   m_ObjectHideFlags: 0
@@ -3343,6 +3355,11 @@ MonoBehaviour:
   leftHoldOffsetRotation: {x: 0, y: 0, z: 0, w: 0}
   rightHoldOffsetRotation: {x: 0, y: 0, z: 0, w: 0}
   maxDrawerDistance: 0.55
+  maxDoorDistance: 1
+  closedAngle: 0
+  openAngle: 90
+  doorTrans: {fileID: 0}
+  handleVisualsPos: {fileID: 0}
   initPosition: {x: 0, y: 0, z: 0}
 --- !u!65 &1082521417
 BoxCollider:
@@ -4227,6 +4244,11 @@ MonoBehaviour:
   leftHoldOffsetRotation: {x: 0, y: 0, z: 0, w: 0}
   rightHoldOffsetRotation: {x: 0, y: 0, z: 0, w: 0}
   maxDrawerDistance: 0.55
+  maxDoorDistance: 1
+  closedAngle: 0
+  openAngle: 90
+  doorTrans: {fileID: 0}
+  handleVisualsPos: {fileID: 0}
   initPosition: {x: 0, y: 0, z: 0}
 --- !u!65 &1213397143
 BoxCollider:
@@ -4895,6 +4917,11 @@ MonoBehaviour:
   leftHoldOffsetRotation: {x: 0, y: 0, z: 0, w: 0}
   rightHoldOffsetRotation: {x: 0, y: 0, z: 0, w: 0}
   maxDrawerDistance: 1
+  maxDoorDistance: 1
+  closedAngle: 0
+  openAngle: 90
+  doorTrans: {fileID: 0}
+  handleVisualsPos: {fileID: 0}
   initPosition: {x: 0, y: 0, z: 0}
 --- !u!54 &1420318561
 Rigidbody:
@@ -6097,6 +6124,11 @@ MonoBehaviour:
   leftHoldOffsetRotation: {x: 0, y: 0, z: 0, w: 0}
   rightHoldOffsetRotation: {x: 0, y: 0, z: 0, w: 0}
   maxDrawerDistance: 1
+  maxDoorDistance: 1
+  closedAngle: 0
+  openAngle: 90
+  doorTrans: {fileID: 0}
+  handleVisualsPos: {fileID: 0}
   initPosition: {x: 0, y: 0, z: 0}
 --- !u!54 &1928035629
 Rigidbody:
@@ -6461,6 +6493,74 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1001 &4734755568098463413
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 841781652}
+    m_Modifications:
+    - target: {fileID: 8473100371002646487, guid: eae34fc1e4482d049badb220a0e0bff0,
+        type: 3}
+      propertyPath: m_Name
+      value: CupboardHousing
+      objectReference: {fileID: 0}
+    - target: {fileID: 8634063338699000053, guid: eae34fc1e4482d049badb220a0e0bff0,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 8634063338699000053, guid: eae34fc1e4482d049badb220a0e0bff0,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 8634063338699000053, guid: eae34fc1e4482d049badb220a0e0bff0,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 8634063338699000053, guid: eae34fc1e4482d049badb220a0e0bff0,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8634063338699000053, guid: eae34fc1e4482d049badb220a0e0bff0,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8634063338699000053, guid: eae34fc1e4482d049badb220a0e0bff0,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8634063338699000053, guid: eae34fc1e4482d049badb220a0e0bff0,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8634063338699000053, guid: eae34fc1e4482d049badb220a0e0bff0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8634063338699000053, guid: eae34fc1e4482d049badb220a0e0bff0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8634063338699000053, guid: eae34fc1e4482d049badb220a0e0bff0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eae34fc1e4482d049badb220a0e0bff0, type: 3}
 --- !u!1001 &5341250303072209842
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6537,6 +6637,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3082616681158813299, guid: 6bacecc4f3df9584198879c73a6b6c36,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4459864850019384737, guid: 6bacecc4f3df9584198879c73a6b6c36,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.34
+      objectReference: {fileID: 0}
     - target: {fileID: 4459864850019384738, guid: 6bacecc4f3df9584198879c73a6b6c36,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6591,6 +6701,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5377246287364169850, guid: 6bacecc4f3df9584198879c73a6b6c36,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -60,7 +60,7 @@ public class HandObjectHolder : MonoBehaviour
 
                     case PickUpObject.MovementType.Drawer:
 
-                        Vector3 newPos = Vector3.Lerp(objectTrans.localPosition, objectTrans.InverseTransformPoint(transform.position + pickUpObject.leftHoldOffsetPosition), pickUpSpeed);
+                        Vector3 newPos = Vector3.Lerp(objectTrans.localPosition, objectTrans.parent.InverseTransformPoint(transform.position + pickUpObject.leftHoldOffsetPosition), pickUpSpeed);
                         newPos = new Vector3(pickUpObject.initPosition.x, pickUpObject.initPosition.y, newPos.z);
 
                         if (newPos.z > pickUpObject.maxDrawerDistance)
@@ -78,8 +78,26 @@ public class HandObjectHolder : MonoBehaviour
                         break;
 
                     case PickUpObject.MovementType.Door:
-                        objectTrans.position = Vector3.Lerp(objectTrans.position, transform.position + pickUpObject.leftHoldOffsetPosition, pickUpSpeed);
-                        objectTrans.rotation = Quaternion.Slerp(objectTrans.rotation, pickUpObject.leftHoldOffsetRotation, 0.1f);
+                        
+                        Vector3 newHandlePos = Vector3.Lerp(objectTrans.localPosition, objectTrans.parent.InverseTransformPoint(transform.position + pickUpObject.leftHoldOffsetPosition), pickUpSpeed);
+                        newHandlePos = new Vector3(pickUpObject.initPosition.x, pickUpObject.initPosition.y, newHandlePos.z);
+                        
+                        if (newHandlePos.z > pickUpObject.maxDoorDistance)
+                        {
+                            newHandlePos = new Vector3(newHandlePos.x, newHandlePos.y, pickUpObject.maxDoorDistance);
+                        }
+                        else if (newHandlePos.z < 0)
+                        {
+                            newHandlePos = new Vector3(newHandlePos.x, newHandlePos.y, 0);
+                        }
+
+                        //objectTrans.localPosition = newHandlePos;
+                                                
+                        float doorRot = Mathf.Lerp(pickUpObject.closedAngle, pickUpObject.openAngle, (newHandlePos.z/ pickUpObject.maxDoorDistance));
+                        pickUpObject.doorTrans.eulerAngles =  new Vector3(0,doorRot,0);
+                            
+                        objectTrans.position = pickUpObject.handleVisualsPos.position;
+
                         break;
                 }
                 
@@ -97,13 +115,45 @@ public class HandObjectHolder : MonoBehaviour
                         break;
 
                     case PickUpObject.MovementType.Drawer:
-                        objectTrans.position = Vector3.Lerp(objectTrans.position, transform.position + pickUpObject.rightHoldOffsetPosition, pickUpSpeed);
-                        objectTrans.rotation = Quaternion.Slerp(objectTrans.rotation, pickUpObject.rightHoldOffsetRotation, 0.1f);
+
+                        Vector3 newPos = Vector3.Lerp(objectTrans.localPosition, objectTrans.parent.InverseTransformPoint(transform.position + pickUpObject.rightHoldOffsetPosition), pickUpSpeed);
+                        newPos = new Vector3(pickUpObject.initPosition.x, pickUpObject.initPosition.y, newPos.z);
+
+                        if (newPos.z > pickUpObject.maxDrawerDistance)
+                        {
+                            newPos = new Vector3(newPos.x, newPos.y, pickUpObject.maxDrawerDistance);
+                        }
+                        else if (newPos.z < 0)
+                        {
+                            newPos = new Vector3(newPos.x, newPos.y, 0);
+                        }
+
+                        objectTrans.localPosition = newPos;
+
+
                         break;
 
                     case PickUpObject.MovementType.Door:
-                        objectTrans.position = Vector3.Lerp(objectTrans.position, transform.position + pickUpObject.rightHoldOffsetPosition, pickUpSpeed);
-                        objectTrans.rotation = Quaternion.Slerp(objectTrans.rotation, pickUpObject.rightHoldOffsetRotation, 0.1f);
+
+                        Vector3 newHandlePos = Vector3.Lerp(objectTrans.localPosition, objectTrans.parent.InverseTransformPoint(transform.position + pickUpObject.rightHoldOffsetPosition), pickUpSpeed);
+                        newHandlePos = new Vector3(pickUpObject.initPosition.x, pickUpObject.initPosition.y, newHandlePos.z);
+
+                        if (newHandlePos.z > pickUpObject.maxDoorDistance)
+                        {
+                            newHandlePos = new Vector3(newHandlePos.x, newHandlePos.y, pickUpObject.maxDoorDistance);
+                        }
+                        else if (newHandlePos.z < 0)
+                        {
+                            newHandlePos = new Vector3(newHandlePos.x, newHandlePos.y, 0);
+                        }
+
+                        //objectTrans.localPosition = newHandlePos;
+
+                        float doorRot = Mathf.Lerp(pickUpObject.closedAngle, pickUpObject.openAngle, (newHandlePos.z / pickUpObject.maxDoorDistance));
+                        pickUpObject.doorTrans.eulerAngles = new Vector3(0, doorRot, 0);
+
+                        objectTrans.position = pickUpObject.handleVisualsPos.position;
+
                         break;
                 }
                 

@@ -12,9 +12,17 @@ public class PickUpObject : MonoBehaviour
     public Quaternion leftHoldOffsetRotation;
     public Quaternion rightHoldOffsetRotation;
 
-
+    [Space]
     [Header("Drawer Settings")]
     public float maxDrawerDistance = 1f;
+
+    [Space]
+    [Header("Door Settings")]
+    public float maxDoorDistance = 1f;
+    public float closedAngle = 0;
+    public float openAngle = 90;
+    public Transform doorTrans;
+    public Transform handleVisualsPos;
 
 
     [HideInInspector]
