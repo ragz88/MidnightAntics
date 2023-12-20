@@ -2741,12 +2741,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 29b528d2669975249a6d5f8ce5f21521,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.9269507
+      value: -2.92
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 29b528d2669975249a6d5f8ce5f21521,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.385905
+      value: 6.419
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 29b528d2669975249a6d5f8ce5f21521,
         type: 3}
@@ -4682,7 +4682,9 @@ MonoBehaviour:
   armSpeed: 1
   maxForwardDistance: 1
   maxReverseDistance: 1
-  maxSideDistance: 1
+  maxOuterDistance: 1
+  maxInnerDistance: 1
+  armLimitSmoothingStrength: 8
   leftArm: {fileID: 1875995704}
   rightArm: {fileID: 911670113}
   standardRestPositionLeft: {fileID: 430689233}
