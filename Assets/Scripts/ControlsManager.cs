@@ -28,13 +28,13 @@ public class ControlsManager : MonoBehaviour
             if (isWalking)
             {
                 isWalking = false;
-                walkingController.enabled = false;
+                walkingController.walkingMode = false;
                 armsController.ArmsLift();
             }
             else
             {
                 isWalking = true;
-                walkingController.enabled = true;
+                walkingController.walkingMode = true;
                 armsController.ArmsRest();
             }
         }

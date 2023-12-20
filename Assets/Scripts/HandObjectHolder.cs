@@ -36,6 +36,10 @@ public class HandObjectHolder : MonoBehaviour
         set { pickUpSpeed = value; }
         get { return pickUpSpeed; }
     }
+    public bool HoldingObject
+    {
+        get { return holdingObject; }
+    }
     
     
     // Start is called before the first frame update
@@ -181,7 +185,7 @@ public class HandObjectHolder : MonoBehaviour
                 pickUpObject = objectTrans.GetComponent<PickUpObject>();
                 pickUpBody = objectTrans.GetComponent<Rigidbody>();
 
-                //pickUpBody.freezeRotation = true;
+                pickUpBody.freezeRotation = true;
             }
         }
     }
@@ -201,7 +205,7 @@ public class HandObjectHolder : MonoBehaviour
 
         if (pickUpBody != null)
         {
-            //pickUpBody.freezeRotation = false;
+            pickUpBody.freezeRotation = false;
             if (!pickUpBody.isKinematic)
             {
                 pickUpBody.velocity = Vector3.zero;

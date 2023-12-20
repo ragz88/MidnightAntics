@@ -288,8 +288,25 @@ public class ArmsController : MonoBehaviour
     /// </summary>
     public void ArmsRest()
     {
-        currentLerpPosLeft = standardRestPositionLeft;
-        currentLerpPosRight = standardRestPositionRight;
+        if (leftObjectHolder.HoldingObject)
+        {
+            currentLerpPosLeft = holdingRestPositionLeft;
+        }
+        else
+        {
+            currentLerpPosLeft = standardRestPositionLeft;
+        }
+
+        if (rightObjectHolder.HoldingObject)
+        {
+            currentLerpPosRight = holdingRestPositionRight;
+        }
+        else
+        {
+            currentLerpPosRight = standardRestPositionRight;
+        }
+
+
         armsActive = false;
         armsLerping = true;
     }
