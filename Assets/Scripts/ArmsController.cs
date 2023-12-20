@@ -113,12 +113,16 @@ public class ArmsController : MonoBehaviour
         }
         else
         {
-
+            OpenHand(leftArm);
         }
 
         if (rightGripInput != 0)
         {
             CloseHand(rightArm);
+        }
+        else
+        {
+            OpenHand(rightArm);
         }
 
 
@@ -244,21 +248,28 @@ public class ArmsController : MonoBehaviour
     {
         if (arm == leftArm)
         {
-            if (!leftHandClosed)
-            {
-                leftHandClosed = true;
-                // play animation
-                leftAnim.SetBool("HandClosed", true);
-            }
+            leftAnim.SetBool("HandClosed", true);
         }
         else if (arm == rightArm)
         {
-            if (!rightHandClosed)
-            {
-                rightHandClosed = true;
-                // play animation
-                rightAnim.SetBool("HandClosed", true);
-            }
+            rightAnim.SetBool("HandClosed", true);
+        }
+    }
+
+
+    /// <summary>
+    /// Closes the hand (if it's still open), then keeps it that way.
+    /// </summary>
+    /// <param name="arm">The arm who's hand must be closed.</param>
+    void OpenHand(Transform arm)
+    {
+        if (arm == leftArm)
+        {
+            leftAnim.SetBool("HandClosed", false);
+        }
+        else if (arm == rightArm)
+        {
+            rightAnim.SetBool("HandClosed", false);
         }
     }
 
