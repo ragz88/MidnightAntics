@@ -15,6 +15,7 @@ public class HandObjectHolder : MonoBehaviour
     private const float SPHERE_CAST_DIST = 3f;
 
 
+    private bool holdingObject = false;
     private float pickUpSpeed = 1f;
     private Collider objectCollider;
     private Transform objectTrans;
@@ -50,17 +51,65 @@ public class HandObjectHolder : MonoBehaviour
         {
             if (handSide == HandType.Left)
             {
-                objectTrans.position = Vector3.Lerp(objectTrans.position, transform.position + pickUpObject.leftHoldOffsetPosition, pickUpSpeed);
-                objectTrans.rotation = Quaternion.Slerp(objectTrans.rotation, pickUpObject.leftHoldOffsetRotation, 0.1f);
+                switch(pickUpObject.movementType)
+                {
+                    case PickUpObject.MovementType.Standard:
+                        objectTrans.position = Vector3.Lerp(objectTrans.position, transform.position + pickUpObject.leftHoldOffsetPosition, pickUpSpeed);
+                        objectTrans.rotation = Quaternion.Slerp(objectTrans.rotation, pickUpObject.leftHoldOffsetRotation, 0.1f);
+                        break;
+
+                    case PickUpObject.MovementType.Drawer:
+
+                        Vector3 potentialPos = Vector3.Lerp(objectTrans.position, transform.position + pickUpObject.leftHoldOffsetPosition, pickUpSpeed);
+                        potentialPos = objectTrans.InverseTransformPoint(potentialPos);
+                        potentialPos = new Vector3(pickUpObject.initPosition.x, pickUpObject.initPosition.y, potentialPos.z);
+                        objectTrans.localPosition = potentialPos;
+
+                        /*if (Vector3.Distance(objectTrans.position, (transform.position + pickUpObject.leftHoldOffsetPosition)) > 0.2f)
+                        {
+                            objectTrans.position = Vector3.Lerp(objectTrans.position,
+                                new Vector3(objectTrans.position.x, objectTrans.position.y, (transform.position + pickUpObject.leftHoldOffsetPosition).z), pickUpSpeed);
+                            if ()
+                            {
+
+                            }
+                        }
+
+
+                        objectTrans.position = Vector3.Lerp(objectTrans.position, transform.position + pickUpObject.leftHoldOffsetPosition, pickUpSpeed);
+                        objectTrans.rotation = Quaternion.Slerp(objectTrans.rotation, pickUpObject.leftHoldOffsetRotation, 0.1f);*/
+                        break;
+
+                    case PickUpObject.MovementType.Door:
+                        objectTrans.position = Vector3.Lerp(objectTrans.position, transform.position + pickUpObject.leftHoldOffsetPosition, pickUpSpeed);
+                        objectTrans.rotation = Quaternion.Slerp(objectTrans.rotation, pickUpObject.leftHoldOffsetRotation, 0.1f);
+                        break;
+                }
+                
+                
                 
                 
             }
             else if (handSide == HandType.Right)
             {
-                //objectTrans.position = Vector3.Lerp(objectTrans.position, transform.position + pickUpObject.rightHoldOffsetTransform.localPosition, pickUpSpeed);
-                //objectTrans.localRotation = Quaternion.Slerp(objectTrans.localRotation, pickUpObject.rightHoldOffsetTransform.localRotation, 1);
-                //objectTrans.rotation = pickUpObject.rightHoldOffsetTransform.localRotation;
-                objectTrans.SetPositionAndRotation(transform.position + pickUpObject.rightHoldOffsetPosition, pickUpObject.rightHoldOffsetRotation);
+                switch (pickUpObject.movementType)
+                {
+                    case PickUpObject.MovementType.Standard:
+                        objectTrans.position = Vector3.Lerp(objectTrans.position, transform.position + pickUpObject.rightHoldOffsetPosition, pickUpSpeed);
+                        objectTrans.rotation = Quaternion.Slerp(objectTrans.rotation, pickUpObject.rightHoldOffsetRotation, 0.1f);
+                        break;
+
+                    case PickUpObject.MovementType.Drawer:
+                        objectTrans.position = Vector3.Lerp(objectTrans.position, transform.position + pickUpObject.rightHoldOffsetPosition, pickUpSpeed);
+                        objectTrans.rotation = Quaternion.Slerp(objectTrans.rotation, pickUpObject.rightHoldOffsetRotation, 0.1f);
+                        break;
+
+                    case PickUpObject.MovementType.Door:
+                        objectTrans.position = Vector3.Lerp(objectTrans.position, transform.position + pickUpObject.rightHoldOffsetPosition, pickUpSpeed);
+                        objectTrans.rotation = Quaternion.Slerp(objectTrans.rotation, pickUpObject.rightHoldOffsetRotation, 0.1f);
+                        break;
+                }
+                
             }
             
         }
@@ -73,22 +122,27 @@ public class HandObjectHolder : MonoBehaviour
     /// </summary>
     public void PickUp()
     {
-        RaycastHit hit;
-        if (Physics.SphereCast(transform.position + (sphereCastRadius * 4 * Vector3.up), sphereCastRadius, Vector3.down, out hit, sphereCastRadius * 4 * pickUpRange, castLayerMask))
+        if (!holdingObject)
         {
-            objectCollider = hit.collider;
-            objectTrans = hit.collider.transform;
-            objectCollider.enabled = false;
-            pickUpObject = objectTrans.GetComponent<PickUpObject>();
-            pickUpBody = objectTrans.GetComponent<Rigidbody>();
+            RaycastHit hit;
+            if (Physics.SphereCast(transform.position + (sphereCastRadius * 4 * Vector3.up), sphereCastRadius, Vector3.down, out hit, sphereCastRadius * 4 * pickUpRange, castLayerMask))
+            {
+                holdingObject = true;
+                objectCollider = hit.collider;
+                objectTrans = hit.collider.transform;
+                objectCollider.enabled = false;
+                pickUpObject = objectTrans.GetComponent<PickUpObject>();
+                pickUpBody = objectTrans.GetComponent<Rigidbody>();
 
-            //pickUpBody.freezeRotation = true;
+                //pickUpBody.freezeRotation = true;
+            }
         }
     }
 
 
     public void DropObject()
     {
+        holdingObject = false;
         objectTrans = null;
         pickUpObject = null;
 
