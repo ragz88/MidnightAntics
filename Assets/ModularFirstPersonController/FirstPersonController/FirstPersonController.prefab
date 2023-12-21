@@ -507,7 +507,7 @@ MonoBehaviour:
   invertCamera: 1
   cameraCanMove: 1
   xLookSensitivity: 7.12
-  yLookSensitivity: 5.06
+  yLookSensitivity: 5.8
   maxLookAngle: 50
   lockCursor: 1
   crosshair: 0

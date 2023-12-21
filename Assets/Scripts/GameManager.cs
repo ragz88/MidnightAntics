@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
 
+    [HideInInspector]
     public SleepingListener currentListener;
 
 
