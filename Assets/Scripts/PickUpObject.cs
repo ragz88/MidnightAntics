@@ -10,8 +10,8 @@ public class PickUpObject : MonoBehaviour
     public bool customColliderHandler = false;
     public Vector3 leftHoldOffsetPosition;
     public Vector3 rightHoldOffsetPosition;
-    public Quaternion leftHoldOffsetRotation;
-    public Quaternion rightHoldOffsetRotation;
+    public Vector3 leftHoldOffsetRotation;
+    public Vector3 rightHoldOffsetRotation;
 
     [Space]
     [Header("Drawer Settings")]

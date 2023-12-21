@@ -540,7 +540,7 @@ MonoBehaviour:
   jumpKey: 32
   jumpPower: 5
   enableCrouch: 1
-  holdToCrouch: 0
+  holdToCrouch: 1
   crouchButton: Crouch
   crouchHeight: 0.8
   speedReduction: 0.6
@@ -1265,6 +1265,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   handSide: 0
+  playerTrans: {fileID: 4459864850019384738}
 --- !u!1 &7924467107064449193
 GameObject:
   m_ObjectHideFlags: 0
@@ -1315,6 +1316,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   handSide: 1
+  playerTrans: {fileID: 4459864850019384738}
 --- !u!1001 &2740104317416971042
 PrefabInstance:
   m_ObjectHideFlags: 0

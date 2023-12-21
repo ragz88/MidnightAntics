@@ -11,6 +11,8 @@ public class HandObjectHolder : MonoBehaviour
 
     [SerializeField] HandType handSide;
 
+    [SerializeField] Transform playerTrans;
+
 
     private const float SPHERE_CAST_DIST = 3f;
 
@@ -59,7 +61,10 @@ public class HandObjectHolder : MonoBehaviour
                 {
                     case PickUpObject.MovementType.Standard:
                         objectTrans.position = Vector3.Lerp(objectTrans.position, transform.position + pickUpObject.leftHoldOffsetPosition, pickUpSpeed);
-                        objectTrans.rotation = Quaternion.Slerp(objectTrans.rotation, pickUpObject.leftHoldOffsetRotation, 0.1f);
+                        //objectTrans.rotation = Quaternion.Slerp(objectTrans.rotation, pickUpObject.leftHoldOffsetRotation, 0.1f);
+                        objectTrans.eulerAngles = new Vector3(pickUpObject.leftHoldOffsetRotation.x,
+                                                                pickUpObject.leftHoldOffsetRotation.y  + transform.eulerAngles.y,
+                                                                pickUpObject.leftHoldOffsetRotation.z);
                         break;
 
                     case PickUpObject.MovementType.Drawer:
@@ -115,9 +120,13 @@ public class HandObjectHolder : MonoBehaviour
                 {
                     case PickUpObject.MovementType.Standard:
                         objectTrans.position = Vector3.Lerp(objectTrans.position, transform.position + pickUpObject.rightHoldOffsetPosition, pickUpSpeed);
-                        objectTrans.rotation = Quaternion.Slerp(objectTrans.rotation, 
-                            new Quaternion(pickUpObject.rightHoldOffsetRotation.x + transform.rotation.x, pickUpObject.rightHoldOffsetRotation.y + transform.rotation.y,
-                            pickUpObject.rightHoldOffsetRotation.z + transform.rotation.z, 0), 0.1f);
+                        //objectTrans.rotation = Quaternion.Slerp(objectTrans.rotation, 
+                        //    new Quaternion(pickUpObject.rightHoldOffsetRotation.x , pickUpObject.rightHoldOffsetRotation.y - playerTrans.eulerAngles.y,
+                        //    pickUpObject.rightHoldOffsetRotation.z, 0), 0.1f);
+                        objectTrans.eulerAngles = new Vector3(pickUpObject.rightHoldOffsetRotation.x,
+                                                                pickUpObject.rightHoldOffsetRotation.y  + transform.eulerAngles.y,
+                                                                pickUpObject.rightHoldOffsetRotation.z);
+
                         break;
 
                     case PickUpObject.MovementType.Drawer:
