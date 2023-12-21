@@ -540,7 +540,7 @@ MonoBehaviour:
   jumpKey: 32
   jumpPower: 5
   enableCrouch: 1
-  holdToCrouch: 1
+  holdToCrouch: 0
   crouchButton: Crouch
   crouchHeight: 0.8
   speedReduction: 0.6

@@ -395,6 +395,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6874842925158174637, guid: 0dc0257b35a9d514786b8ee91fb9600a,
+        type: 3}
+      propertyPath: leftHoldOffsetRotation.z
+      value: -80
+      objectReference: {fileID: 0}
+    - target: {fileID: 6874842925158174637, guid: 0dc0257b35a9d514786b8ee91fb9600a,
+        type: 3}
+      propertyPath: rightHoldOffsetRotation.z
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 8574819218518992983, guid: 0dc0257b35a9d514786b8ee91fb9600a,
         type: 3}
       propertyPath: m_Name

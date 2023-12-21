@@ -16,16 +16,35 @@ public class BreadController : MonoBehaviour
     private GameObject pbjBlob;
 
 
+    [SerializeField]
+    private Collider standardCollider;
+
+    [SerializeField]
+    private HandObjectHolder leftHolder;
+    [SerializeField]
+    private HandObjectHolder rightHolder;
+    [SerializeField]
+    private GameObject sandwich;
+
+    private PickUpObject pickUpObject;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        pickUpObject = GetComponent<PickUpObject>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (pickUpObject.isHeld)
+        {
+            standardCollider.enabled = false;
+        }
+        else
+        {
+            standardCollider.enabled = true;
+        }
     }
 
     public void AddCondiment(CondimentType condiment)
@@ -59,13 +78,37 @@ public class BreadController : MonoBehaviour
                 pbjBlob.SetActive(true);
             }
         }
+        else if (condiment == CondimentType.PBJ)
+        {
+            if (breadCondiment == CondimentType.None)
+            {
+                breadCondiment = CondimentType.PBJ;
+                pbjBlob.SetActive(true);
+            }
+            else if (breadCondiment == CondimentType.PeanutButter)
+            {
+                breadCondiment = CondimentType.PBJ;
+                peanutBlob.SetActive(false);
+                pbjBlob.SetActive(true);
+            }
+            else if (breadCondiment == CondimentType.Jam)
+            {
+                breadCondiment = CondimentType.PBJ;
+                jamBlob.SetActive(false);
+                pbjBlob.SetActive(true);
+            }
+        }
     }
 
 
 
     private void MakeSandwich(GameObject otherSlice)
     {
-        Debug.Log("Winner");
+        leftHolder.DropObject();
+        rightHolder.DropObject();
+        otherSlice.SetActive(false);
+        Instantiate(sandwich, transform.position, transform.rotation);
+        gameObject.SetActive(false);
     }
 
 

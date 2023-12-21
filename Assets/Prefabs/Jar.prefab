@@ -433,10 +433,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementType: 0
+  customColliderHandler: 0
   leftHoldOffsetPosition: {x: 0, y: -0.05, z: 0}
   rightHoldOffsetPosition: {x: 0, y: -0.05, z: 0}
-  leftHoldOffsetRotation: {x: 0.08715574, y: 0, z: 0, w: 0.9961947}
-  rightHoldOffsetRotation: {x: -0.08715574, y: 0, z: 0, w: 0.9961947}
+  leftHoldOffsetRotation: {x: 0.08715574, y: 0, z: 0}
+  rightHoldOffsetRotation: {x: -0.08715574, y: 0, z: 0}
   maxDrawerDistance: 1
   maxDoorDistance: 1
   closedAngle: 0
@@ -621,10 +622,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementType: 0
+  customColliderHandler: 0
   leftHoldOffsetPosition: {x: 0.04, y: -0.02, z: 0}
   rightHoldOffsetPosition: {x: -0.04, y: -0.02, z: 0}
-  leftHoldOffsetRotation: {x: 0, y: 0, z: 0.53729963, w: -0.8433914}
-  rightHoldOffsetRotation: {x: 0, y: 0, z: 0.53729963, w: 0.8433914}
+  leftHoldOffsetRotation: {x: 0, y: 0, z: -80}
+  rightHoldOffsetRotation: {x: 0, y: 0, z: 80}
   maxDrawerDistance: 1
   maxDoorDistance: 1
   closedAngle: 0
@@ -672,6 +674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ee1a767d0846a242aca4f036b35d56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contents: 0
   isOpen: 0
   lidPickUp: {fileID: 6967043491577559638}
   fakeLid: {fileID: 3021946557005399914}
