@@ -446,7 +446,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -501,12 +501,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d90ba6530d9bfda47abb4610956b2f44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkingMode: 1
   playerCamera: {fileID: 4459864851310106426}
   fov: 60
   invertCamera: 1
   cameraCanMove: 1
-  xLookSensitivity: 5.03
-  yLookSensitivity: 2.59
+  xLookSensitivity: 7.12
+  yLookSensitivity: 5.06
   maxLookAngle: 50
   lockCursor: 1
   crosshair: 0
@@ -578,7 +579,7 @@ MonoBehaviour:
   initialArmsPositionLeft: {fileID: 7336282924272768029}
   initialArmsPositionRight: {fileID: 1199547010547458451}
   lerpSpeed: 2
-  lerpAccuracy: 0.02
+  lerpAccuracy: 0.05
   pickUpSpeed: 5
 --- !u!1 &4459864850190357393
 GameObject:
