@@ -310,6 +310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementType: 2
+  customColliderHandler: 0
   leftHoldOffsetPosition: {x: 0, y: -0.1, z: -0.2}
   rightHoldOffsetPosition: {x: 0, y: -0.1, z: -0.2}
   leftHoldOffsetRotation: {x: 0, y: 0, z: 0, w: 0}

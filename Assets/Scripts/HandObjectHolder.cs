@@ -59,7 +59,7 @@ public class HandObjectHolder : MonoBehaviour
                 {
                     case PickUpObject.MovementType.Standard:
                         objectTrans.position = Vector3.Lerp(objectTrans.position, transform.position + pickUpObject.leftHoldOffsetPosition, pickUpSpeed);
-                        objectTrans.localRotation = Quaternion.Slerp(objectTrans.localRotation, pickUpObject.leftHoldOffsetRotation, 0.1f);
+                        objectTrans.rotation = Quaternion.Slerp(objectTrans.rotation, pickUpObject.leftHoldOffsetRotation, 0.1f);
                         break;
 
                     case PickUpObject.MovementType.Drawer:
@@ -115,7 +115,9 @@ public class HandObjectHolder : MonoBehaviour
                 {
                     case PickUpObject.MovementType.Standard:
                         objectTrans.position = Vector3.Lerp(objectTrans.position, transform.position + pickUpObject.rightHoldOffsetPosition, pickUpSpeed);
-                        objectTrans.localRotation = Quaternion.Slerp(objectTrans.localRotation, pickUpObject.rightHoldOffsetRotation, 0.1f);
+                        objectTrans.rotation = Quaternion.Slerp(objectTrans.rotation, 
+                            new Quaternion(pickUpObject.rightHoldOffsetRotation.x + transform.rotation.x, pickUpObject.rightHoldOffsetRotation.y + transform.rotation.y,
+                            pickUpObject.rightHoldOffsetRotation.z + transform.rotation.z, 0), 0.1f);
                         break;
 
                     case PickUpObject.MovementType.Drawer:
@@ -207,7 +209,7 @@ public class HandObjectHolder : MonoBehaviour
         {
             pickUpObject.isHeld = false;
         }
-        
+
         objectTrans = null;
         
 
@@ -234,9 +236,9 @@ public class HandObjectHolder : MonoBehaviour
     }
 
 
-    void OnDrawGizmos()
+    /*void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawSphere(transform.position, sphereCastRadius);
-    }
+    }*/
 }
