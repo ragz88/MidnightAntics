@@ -7,6 +7,7 @@ public class PickUpObject : MonoBehaviour
 {
     public MovementType movementType = MovementType.Standard;
 
+    public bool customColliderHandler = false;
     public Vector3 leftHoldOffsetPosition;
     public Vector3 rightHoldOffsetPosition;
     public Quaternion leftHoldOffsetRotation;

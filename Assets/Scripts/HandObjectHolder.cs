@@ -59,7 +59,7 @@ public class HandObjectHolder : MonoBehaviour
                 {
                     case PickUpObject.MovementType.Standard:
                         objectTrans.position = Vector3.Lerp(objectTrans.position, transform.position + pickUpObject.leftHoldOffsetPosition, pickUpSpeed);
-                        objectTrans.rotation = Quaternion.Slerp(objectTrans.rotation, pickUpObject.leftHoldOffsetRotation, 0.1f);
+                        objectTrans.localRotation = Quaternion.Slerp(objectTrans.localRotation, pickUpObject.leftHoldOffsetRotation, 0.1f);
                         break;
 
                     case PickUpObject.MovementType.Drawer:
@@ -115,7 +115,7 @@ public class HandObjectHolder : MonoBehaviour
                 {
                     case PickUpObject.MovementType.Standard:
                         objectTrans.position = Vector3.Lerp(objectTrans.position, transform.position + pickUpObject.rightHoldOffsetPosition, pickUpSpeed);
-                        objectTrans.rotation = Quaternion.Slerp(objectTrans.rotation, pickUpObject.rightHoldOffsetRotation, 0.1f);
+                        objectTrans.localRotation = Quaternion.Slerp(objectTrans.localRotation, pickUpObject.rightHoldOffsetRotation, 0.1f);
                         break;
 
                     case PickUpObject.MovementType.Drawer:
@@ -181,13 +181,17 @@ public class HandObjectHolder : MonoBehaviour
                 holdingObject = true;
                 objectCollider = hit.collider;
                 objectTrans = hit.collider.transform;
-                objectCollider.enabled = false;
+                
                 pickUpObject = objectTrans.GetComponent<PickUpObject>();
                 pickUpBody = objectTrans.GetComponent<Rigidbody>();
 
                 if (pickUpObject != null)
                 {
                     pickUpObject.isHeld = true;
+                    if (!pickUpObject.customColliderHandler)
+                    {
+                        objectCollider.enabled = false;
+                    }
                 }
 
                 pickUpBody.freezeRotation = true;
@@ -205,13 +209,18 @@ public class HandObjectHolder : MonoBehaviour
         }
         
         objectTrans = null;
-        pickUpObject = null;
+        
 
         if (objectCollider != null)
         {
-            objectCollider.enabled = true;
+            if (!pickUpObject.customColliderHandler)
+            {
+                objectCollider.enabled = true;
+            }
             objectCollider = null;
         }
+
+        pickUpObject = null;
 
         if (pickUpBody != null)
         {

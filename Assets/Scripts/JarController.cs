@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class JarController : MonoBehaviour
 {
+    public CondimentType contents;
+    
     [HideInInspector]
     public bool isOpen = false;
 
@@ -18,6 +20,7 @@ public class JarController : MonoBehaviour
     private GameObject fakeLid;
     [SerializeField]
     private Collider jamTrigger;
+
 
 
     // Start is called before the first frame update
@@ -60,5 +63,10 @@ public class JarController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Check if open and trigger ting is a knife.
+        if (other.CompareTag("Knife") && isOpen)
+        {
+            KnifeController knifeController = other.GetComponent<KnifeController>();
+            knifeController.AddCondiment(contents);
+        }
     }
 }
