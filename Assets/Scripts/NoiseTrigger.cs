@@ -12,7 +12,7 @@ public class NoiseTrigger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        noiseSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -25,7 +25,7 @@ public class NoiseTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player") && !noiseSource.isPlaying)
         {
-            FirstPersonController playerController = GetComponent<FirstPersonController>();
+            FirstPersonController playerController = other.GetComponent<FirstPersonController>();
 
             if (playerController != null)
             {

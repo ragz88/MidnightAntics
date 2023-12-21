@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using Unity.VisualScripting.FullSerializer;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class ArmsController : MonoBehaviour
