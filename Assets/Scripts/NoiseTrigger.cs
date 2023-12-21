@@ -25,9 +25,18 @@ public class NoiseTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player") && !noiseSource.isPlaying)
         {
-            noiseSource.Play();
-            listener = GameManager.instance.currentListener;
-            listener.LoudSound();
+            FirstPersonController playerController = GetComponent<FirstPersonController>();
+
+            if (playerController != null)
+            {
+                if (!playerController.isCrouched)
+                {
+                    noiseSource.Play();
+                    listener = GameManager.instance.currentListener;
+                    listener.LoudSound();
+                }
+            }
+
         }
     }
 }
