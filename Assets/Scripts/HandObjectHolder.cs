@@ -23,6 +23,7 @@ public class HandObjectHolder : MonoBehaviour
     private Transform objectTrans;
     private PickUpObject pickUpObject;
     private Rigidbody pickUpBody;
+    private FallNoise pickUpFallNoise;
 
 
     [System.Serializable]
@@ -196,6 +197,13 @@ public class HandObjectHolder : MonoBehaviour
                 pickUpObject = objectTrans.GetComponent<PickUpObject>();
                 pickUpBody = objectTrans.GetComponent<Rigidbody>();
 
+                pickUpFallNoise = objectTrans.GetComponent<FallNoise>();
+
+                if (pickUpFallNoise != null)
+                {
+                    pickUpFallNoise.beingHeld = true;
+                }
+
                 if (pickUpObject != null)
                 {
                     pickUpObject.isHeld = true;
@@ -241,6 +249,11 @@ public class HandObjectHolder : MonoBehaviour
                 pickUpBody.velocity = Vector3.zero;
             }
             pickUpBody = null;
+        }
+
+        if (pickUpFallNoise != null)
+        {
+            pickUpFallNoise.beingHeld = false;
         }
     }
 

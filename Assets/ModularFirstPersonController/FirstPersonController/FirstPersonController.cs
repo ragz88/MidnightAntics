@@ -130,10 +130,13 @@ public class FirstPersonController : MonoBehaviour
     public Transform joint;
     public float bobSpeed = 10f;
     public Vector3 bobAmount = new Vector3(.15f, .05f, 0f);
+    public AudioClip stepSound1;
+    public AudioClip stepSound2;
 
     // Internal Variables
     private Vector3 jointOriginalPos;
     private float timer = 0;
+    private AudioSource stepAudioSource;
 
     #endregion
 
@@ -202,6 +205,9 @@ public class FirstPersonController : MonoBehaviour
         }
 
         #endregion
+
+
+        stepAudioSource = GetComponent<AudioSource>();
     }
 
     float camRotation;
@@ -568,6 +574,22 @@ public class FirstPersonController : MonoBehaviour
             }
             // Applies HeadBob movement
             joint.localPosition = new Vector3(jointOriginalPos.x + Mathf.Sin(timer) * bobAmount.x, jointOriginalPos.y + Mathf.Sin(timer) * bobAmount.y, jointOriginalPos.z + Mathf.Sin(timer) * bobAmount.z);
+
+
+            // Plays footstep on trough of bob.
+            if (Mathf.Sin(timer) < -0.93f && stepAudioSource.isPlaying == false)
+            {
+                if (stepAudioSource.clip == stepSound1)
+                {
+                    stepAudioSource.clip = stepSound2;
+                }
+                else
+                {
+                    stepAudioSource.clip = stepSound1;
+                }
+
+                stepAudioSource.Play();
+            }
         }
         else
         {

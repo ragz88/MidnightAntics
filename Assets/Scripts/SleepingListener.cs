@@ -30,7 +30,7 @@ public class SleepingListener : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -67,7 +67,10 @@ public class SleepingListener : MonoBehaviour
         }
         else if (sleepState == SleepState.Alert)
         {
-            //Game Over
+            audioSource.Stop();
+            audioSource.loop = false;
+            audioSource.PlayOneShot(awakeSound);
+            GameManager.instance.LoseGame();
         }
     }
 }
