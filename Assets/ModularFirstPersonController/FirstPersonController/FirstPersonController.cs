@@ -389,7 +389,7 @@ public class FirstPersonController : MonoBehaviour
         else
         {
             #region Hands Camera
-            //yaw = transform.localEulerAngles.y + Input.GetAxis("LookX") * xLookSensitivity;
+            yaw = transform.localEulerAngles.y + Input.GetAxis("Yaw") * xLookSensitivity;
 
             if (!invertCamera)
             {
@@ -404,7 +404,7 @@ public class FirstPersonController : MonoBehaviour
             // Clamp pitch between lookAngle
             pitch = Mathf.Clamp(pitch, -maxLookAngle, maxLookAngle);
 
-            //transform.localEulerAngles = new Vector3(0, yaw, 0);
+            transform.localEulerAngles = new Vector3(0, yaw, 0);
             playerCamera.transform.localEulerAngles = new Vector3(pitch, 0, 0);
             #endregion
         }

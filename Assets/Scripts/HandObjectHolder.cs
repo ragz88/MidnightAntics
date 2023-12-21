@@ -185,6 +185,11 @@ public class HandObjectHolder : MonoBehaviour
                 pickUpObject = objectTrans.GetComponent<PickUpObject>();
                 pickUpBody = objectTrans.GetComponent<Rigidbody>();
 
+                if (pickUpObject != null)
+                {
+                    pickUpObject.isHeld = true;
+                }
+
                 pickUpBody.freezeRotation = true;
             }
         }
@@ -194,6 +199,11 @@ public class HandObjectHolder : MonoBehaviour
     public void DropObject()
     {
         holdingObject = false;
+        if (pickUpObject != null)
+        {
+            pickUpObject.isHeld = false;
+        }
+        
         objectTrans = null;
         pickUpObject = null;
 

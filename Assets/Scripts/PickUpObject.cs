@@ -27,6 +27,8 @@ public class PickUpObject : MonoBehaviour
 
     [HideInInspector]
     public Vector3 initPosition;
+    [HideInInspector]
+    public bool isHeld;
 
     /// <summary>
     /// Different objects move in different ways, with various limitations. Draws slide on one axis. Doors swing.
